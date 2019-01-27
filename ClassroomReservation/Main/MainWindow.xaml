@@ -1,0 +1,173 @@
+﻿<Window x:Class="ClassroomReservation.Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassroomReservation"
+        mc:Ignorable="d"
+        Title="고려대학교 정보대학 강의실 예약" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="HorizontalScrollViewerStyle" TargetType="ScrollViewer">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        <Style x:Key="BorderStyle"  TargetType="{x:Type Border}">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" Direction="-45" RenderingBias="Quality" ShadowDepth="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Background" Value="{StaticResource ResourceKey = MainColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 1 0 0" />
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ResourceKey = MainColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel Name="dockpanel1">
+        <DockPanel.Background>
+            <ImageBrush ImageSource="/Resource/Background.png"/>
+        </DockPanel.Background>
+        <Border DockPanel.Dock="Bottom" Height="220" Margin="0,10,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Image Name="leftbottomLogoImage" Source="/Resource/logo_big.png" Margin="20, 0, 0, 0"/>
+                    <Rectangle Name="ChangeModeButton" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,0,0,0" Width="40" Height="110" Fill="Transparent"/>
+                    <Grid Name="AdminButtonPanel" Grid.Column="0" Margin="60,10,30,10" Visibility="Hidden">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Style="{StaticResource BorderStyle}">
+                            <Button Name="readExcelFileButton" Content="강의 시간표 불러오기" Style="{StaticResource ButtonStyle}" Margin="0,0,0,6" FontSize="18"/>
+                        </Border>
+                        <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
+                            <Button Name="halfYearDeleteButton" Content="2016년 상반기(1월 ~ 6월) DB 삭제" Style="{StaticResource ButtonStyle}" Margin="0,2,0,4" FontSize="18"/>
+                        </Border>
+                        <Border Grid.Row="2" Style="{StaticResource BorderStyle}">
+                            <Button Name="selectPeriodDeleteButton" Content="선택 기간 DB 삭제" Style="{StaticResource ButtonStyle}" Margin="0,4,0,2" FontSize="18"/>
+                        </Border>
+                        <Grid Grid.Row="3" Margin="0,6,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Style="{StaticResource BorderStyle}">
+                                <Button Name="modifyClassroomButton" Content="강의실 추가/제거" Style="{StaticResource ButtonStyle}" Margin="0,0,3,0" FontSize="18"/>
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+                                <Button Name="modifyClasstimeButton" Content="시간표 변경" Style="{StaticResource ButtonStyle}" Margin="3,0,0,0" FontSize="18"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <DockPanel Name="infoPanel" Grid.Column="1" Margin="30,10,30,10" >
+                    <Border Style="{StaticResource BorderStyle}">
+                        <Grid Background="{StaticResource ResourceKey = MainColor}">
+                            <DockPanel Name="dockpanel_in" Margin="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border>
+                                        <Label Name="label1" Grid.Row="0" Background="{StaticResource ResourceKey = SubColor}" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5" FontSize="11">이름</Label>
+                                    </Border>
+                                    <Border Grid.Row="1">
+                                        <Label Name="label2" Background="{StaticResource ResourceKey = SubColor}" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5" FontSize="11">연락처</Label>
+                                    </Border>
+                                    <Border Grid.Row="2">
+                                        <Label Name="label3" Background="{StaticResource ResourceKey = SubColor}" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5" FontSize="11">대관 내용</Label>
+                                    </Border>
+                                    <Border Grid.Row="0" Grid.Column="1" Margin="5">
+                                        <TextBox Name="userNameTextBox" VerticalContentAlignment="Center" Padding="4" IsReadOnly="True"/>
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.Column="1" Margin="5">
+                                        <TextBox Name="contactTextBox" VerticalContentAlignment="Center" Padding="4" IsReadOnly="True"/>
+                                    </Border>
+                                    <Border Grid.Row="2" Grid.Column="1" Margin="5">
+                                        <TextBox Name="contentTextBox" TextWrapping="Wrap" Padding="4" IsReadOnly="True"/>
+                                    </Border>
+                                    <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Margin="5">
+                                        <Button Name="modifyReservationUserButton" Content="정보 수정" Grid.Row="0" Background="{StaticResource ResourceKey = SubColor}" BorderThickness="0" Foreground="White" FontSize="16"/>
+                                    </Border>
+                                    <Border Grid.Row="2" Grid.Column="2" Margin="5">
+                                        <Button Name="deleteReservationUserButton" Content="예약 삭제" Grid.Row="0" Background="{StaticResource ResourceKey = SubColor}" BorderThickness="0" Foreground="White" FontSize="16"/>
+                                    </Border>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+
+                <Border Grid.Column="2" Style="{StaticResource BorderStyle}">
+                    <Button Name="reservateButton" Content="예약하러 가기" Style="{StaticResource ButtonStyle}" Margin="30,10,60,10" FontSize="30"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border DockPanel.Dock="Left" Width="160">
+            <DockPanel Name="dockpanel4">
+                <Grid Name="leftTopLayout" DockPanel.Dock="Top" Height="115">
+                    <Image Name="leftTopLogoHover" Source="/Resource/logo_small_hover.png" Margin="10"/>
+                    <Image Name="leftTopLogo" Source="/Resource/logo_small.png" Margin="10"/>
+                </Grid>
+                <Border Margin="0 0 0 20">
+                    <Grid Name="leftLabelsGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="55*"/>
+                            <ColumnDefinition Width="45*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </Border>
+
+        <Border Name="topDockPanel" DockPanel.Dock="Top" Height="35">
+            <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                <Border DockPanel.Dock="Right" Style="{StaticResource BorderStyle}" >
+                    <Button Name="changeModeToUserModeButton" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="20" Margin="0,0,50,0" Width="250" Visibility="Hidden">
+                        일반 사용자 모드로 변경
+                    </Button>
+                </Border>
+                <Border DockPanel.Dock="Right" Style="{StaticResource BorderStyle}">
+                    <Button Name="changePasswordButton" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource ResourceKey=ButtonStyle}" FontSize="20" Margin="0,0,50,0" Visibility="Hidden">
+                        비밀번호 변경
+                    </Button>
+                </Border>
+                <Viewbox DockPanel.Dock="Left" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                    <DatePicker Name="MainWindow_DatePicker" SelectedDateFormat="Long"/>
+                </Viewbox>
+                <Label Name="endDateLable" FontSize="15" VerticalContentAlignment="Bottom"/>
+            </DockPanel>
+        </Border>
+        <Border BorderThickness="3" BorderBrush="Black">
+            <ScrollViewer Name="ScrollViewer" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                <StackPanel Orientation="Horizontal" Name="scrollViewContentPanel"/>
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</Window>

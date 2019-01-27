@@ -1,0 +1,55 @@
+﻿<Application x:Class="ClassroomReservation.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClassroomReservation"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             StartupUri="Main/MainWindow.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LoadingIndicators.WPF;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!--<Style TargetType="TextBlock" x:Key="TitleText">
+                <Setter Property="Background" Value="Green"/>
+                <Setter Property="DockPanel.Dock" Value="Top"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="#4E87D4"/>
+                <Setter Property="FontFamily" Value="Tahoma"/>
+                <Setter Property="Margin" Value="0,40,10,10"/>
+                <Setter Property="Width" Value="300"></Setter>
+            </Style>-->
+            <sys:String x:Key="strHelloWorld">Hello, world!</sys:String>
+
+            <SolidColorBrush x:Key="MainColor" Color="#74A0BF"/>
+            <SolidColorBrush x:Key="SubColor" Color="#88BCE0"/>
+            <SolidColorBrush x:Key="SubColor2" Color="#7ABFA0"/>
+            <SolidColorBrush x:Key="Color1" Color="#7277CC"/>
+            <SolidColorBrush x:Key="Color2" Color="#7796D6"/>
+            <SolidColorBrush x:Key="Color3" Color="#77C8D6"/>
+            <SolidColorBrush x:Key="Color4" Color="#72CCC1"/>
+            <SolidColorBrush x:Key="LabelBackground" Color="#FF789878"/>
+            <SolidColorBrush x:Key="BackgroundOfEvenRow" Color="#22FFFFFF"/>
+            <SolidColorBrush x:Key="BackgroundOfOddRow" Color="#22888888"/>
+            <SolidColorBrush x:Key="HoverColor" Color="#98DDFF"/>
+            <SolidColorBrush x:Key="HoverColor2" Color="#f65314"/>
+            <SolidColorBrush x:Key="SelectedColor" Color="#DA4B0D"/>
+            <SolidColorBrush x:Key="SelectedColorInReservationWindow" Color="#00a1f1"/>
+            <SolidColorBrush x:Key="ReservationColor" Color="IndianRed"/>
+            <SolidColorBrush x:Key="LectureColor" Color="#7A929E"/>
+            <SolidColorBrush x:Key="LectureColor2" Color="#778D99"/>
+
+            <SolidColorBrush x:Key="Crimson" Color="#980021"/>
+            <SolidColorBrush x:Key="MicrosoftRed" Color="#f65314"/>
+            <SolidColorBrush x:Key="MicrosoftBlue" Color="#00a1f1"/>
+            <SolidColorBrush x:Key="DisableOverlap" Color="#55000000"/>
+            <SolidColorBrush x:Key="Hover" Color="LightGray"/>
+            <x:Array x:Key="TimeTable" Type="sys:String" 
+                xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                <sys:String>One</sys:String>
+                <sys:String>Two</sys:String>
+            </x:Array>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
